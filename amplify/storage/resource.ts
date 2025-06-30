@@ -1,12 +1,11 @@
-import { defineStorage } from '@aws-amplify/backend';
+import { defineStorage } from "@aws-amplify/backend";
 
 export const storage = defineStorage({
-  name: 'profilePictures',
+  name: "profilePictures",
   access: (allow) => ({
-    'profile-pictures/{entity_id}/*': [
-      allow.authenticated.to(['write']), // l'utilisateur peut uploader
-      allow.authenticated.to(['read']),  // l'utilisateur peut voir sa photo
-      allow.guest.to(['read']),          // tout le monde peut voir les photos
+    "profile-pictures/{entity_id}/*": [
+      allow.authenticated.to(["read", "write"]), // utilisateurs authentifiés peuvent lire et écrire
+      allow.guest.to(["read"]), // invités peuvent seulement lire
     ],
   }),
 });
